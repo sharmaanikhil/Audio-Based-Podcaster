@@ -11,7 +11,6 @@ const Login = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const backendUrl = process.env.REACT_APP_BACKEND_URL;
   const [Values, setValues] = useState({
     email: "",
     password: "",
@@ -25,7 +24,7 @@ const Login = () => {
   const handleSubmit = async () => {
     try {
       const res = await axios.post(
-        `${backendUrl}/api/v1/sign-in`,
+        `/api/v1/sign-in`,
         Values,
         {
           withCredentials: true,

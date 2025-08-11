@@ -9,7 +9,6 @@ import ErrorPage from "./ErrorPage";
 const Signup = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const navigate = useNavigate();
-  const backendUrl = process.env.REACT_APP_BACKEND_URL;
   const [Values, setValues] = useState({
     username: "",
     email: "",
@@ -24,7 +23,7 @@ const Signup = () => {
   const handleSubmit = async () => {
     try {
       const res = await axios.post(
-        `${backendUrl}/api/v1/sign-up`,
+        `/api/v1/sign-up`,
         Values
       );
       navigate("/login");

@@ -6,18 +6,17 @@ import PodcastCard from "../components/PodcastCard/PodcastCard";
 const CategoriesPage = () => {
   const { cat } = useParams();
   const [Podcasts, setPodcasts] = useState();
-  const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
   useEffect(() => {
     const fetch = async () => {
       const res = await axios.get(
-        `${backendUrl}/api/v1/category/${cat}`,
+        `/api/v1/category/${cat}`,
         { withCredentials: true }
       );
       setPodcasts(res.data.data);
     };
     fetch();
-  }, [cat, backendUrl]);
+  }, [cat]);
 
   return (
     <div className="px-4 py-4 lg:px-12">

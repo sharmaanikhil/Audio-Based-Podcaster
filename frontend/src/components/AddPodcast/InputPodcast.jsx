@@ -51,15 +51,15 @@ const InputPodcast = () => {
     data.append("audioFile", audioFile);
     try {
       const res = await axios.post(
-  `${process.env.REACT_APP_BACKEND_URL}/api/v1/add-podcast`,
-  data,
-  {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-    withCredentials: true,
-  }
-);
+        "/api/v1/add-podcast", // <-- Changed to a relative path
+        data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          withCredentials: true,
+        }
+      );
       toast.success(res.data.message);
     } catch (error) {
       toast.error(error.response.data.message);

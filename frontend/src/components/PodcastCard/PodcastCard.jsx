@@ -6,17 +6,19 @@ import { playerActions } from "../../store/player";
 const PodcastCard = ({ items }) => {
   const disaptch = useDispatch();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  // Removed the backendUrl variable
 
   const handlePlay = (e) => {
     if (isLoggedIn) {
       e.preventDefault();
       disaptch(playerActions.setDiv());
       disaptch(
-        playerActions.changeImage(`${backendUrl}/${items.frontImage}`)
+        
+        playerActions.changeImage(`/${items.frontImage}`)
       );
       disaptch(
-        playerActions.changeSong(`${backendUrl}/${items.audioFile}`)
+       
+        playerActions.changeSong(`/${items.audioFile}`)
       );
     }
   };
@@ -29,7 +31,8 @@ const PodcastCard = ({ items }) => {
       >
         <div>
           <img
-            src={`${backendUrl}/${items.frontImage}`}
+            
+            src={`/${items.frontImage}`}
             className="rounded size-[42vh] object-cover"
           />
         </div>

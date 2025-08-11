@@ -5,18 +5,17 @@ import PodcastCard from "../PodcastCard/PodcastCard";
 
 const YourPodcasts = () => {
   const [Podcasts, setPodcasts] = useState();
-  const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
   useEffect(() => {
     const fetch = async () => {
       const res = await axios.get(
-        `${backendUrl}/api/v1/get-user-podcasts`,
+        `/api/v1/get-user-podcasts`,
         { withCredentials: true }
       );
       setPodcasts(res.data.data);
     };
     fetch();
-  }, [backendUrl]); // Add backendUrl to dependency array
+  }, []);
 
   return (
     <div className="px-4 lg:px-12 my-4">

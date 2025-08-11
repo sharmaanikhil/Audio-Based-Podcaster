@@ -16,15 +16,15 @@ import AddPodcast from "./pages/AddPodcast.jsx";
 import AllPodcasts from "./pages/AllPodcasts.jsx";
 import CategoriesPage from "./pages/CategoriesPage.jsx";
 import DescriptionPage from "./pages/DescriptionPage.jsx";
+
 const App = () => {
   const dispatch = useDispatch();
-  const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
   useEffect(() => {
     const fetch = async () => {
       try {
         const res = await axios.get(
-          `${backendUrl}/api/v1/check-cookie`,
+          "/api/v1/check-cookie", // <-- Changed to a relative path
           { withCredentials: true }
         );
         if (res.data.message == true) {
@@ -34,11 +34,8 @@ const App = () => {
         //console.log(error);
       }
     };
-   
-    if (backendUrl) {
-      fetch();
-    }
-  }, [dispatch, backendUrl]);
+    fetch();
+  }, [dispatch]); // Removed backendUrl from dependency array
 
   return (
     <div className="">

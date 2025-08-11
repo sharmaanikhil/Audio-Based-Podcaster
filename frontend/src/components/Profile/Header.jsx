@@ -8,20 +8,19 @@ const Header = () => {
   const [UserData, setUserData] = useState();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
   useEffect(() => {
     const fetchUserDetails = async () => {
-      const res = await axios.get(`${backendUrl}/api/v1/user-details`, {
+      const res = await axios.get(`/api/v1/user-details`, {
         withCredentials: true,
       });
       setUserData(res.data.user);
     };
     fetchUserDetails();
-  }, [backendUrl]); // Add backendUrl to dependency array
+  }, []);
 
   const LogoutHandler = async () => {
-    const res = await axios.post(`${backendUrl}/api/v1/logout`, {}, {
+    const res = await axios.post(`/api/v1/logout`, {}, {
       withCredentials: true,
     });
     dispatch(authActions.logout());
@@ -29,7 +28,6 @@ const Header = () => {
   };
 
   return (
-    // ... rest of your JSX code
     <>
       {UserData && (
         <div className="bg-green-900 rounded py-8 flex flex-col md:flex-row items-center justify-center  gap-4 md:justify-between px-4 lg:px-12">
