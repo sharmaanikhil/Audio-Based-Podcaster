@@ -2,21 +2,25 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { playerActions } from "../../store/player";
+
 const PodcastCard = ({ items }) => {
   const disaptch = useDispatch();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
   const handlePlay = (e) => {
     if (isLoggedIn) {
       e.preventDefault();
       disaptch(playerActions.setDiv());
       disaptch(
-        playerActions.changeImage(`http://localhost:1000/${items.frontImage}`)
+        playerActions.changeImage(`${backendUrl}/${items.frontImage}`)
       );
       disaptch(
-        playerActions.changeSong(`http://localhost:1000/${items.audioFile}`)
+        playerActions.changeSong(`${backendUrl}/${items.audioFile}`)
       );
     }
   };
+
   return (
     <div>
       <Link
@@ -25,7 +29,7 @@ const PodcastCard = ({ items }) => {
       >
         <div>
           <img
-            src={`http://localhost:1000/${items.frontImage}`}
+            src={`${backendUrl}/${items.frontImage}`}
             className="rounded size-[42vh] object-cover"
           />
         </div>

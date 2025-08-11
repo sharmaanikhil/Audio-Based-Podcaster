@@ -1,16 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useState } from "react";
 import PodcastCard from "../components/PodcastCard/PodcastCard";
+
 const AllPodcasts = () => {
   const [Podcasts, setPodcasts] = useState();
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
   useEffect(() => {
     const fetch = async () => {
-      const res = await axios.get("http://localhost:1000/api/v1/get-podcasts");
+      const res = await axios.get(`${backendUrl}/api/v1/get-podcasts`);
       setPodcasts(res.data.data);
     };
     fetch();
-  }, []);
+  }, [backendUrl]);
 
   return (
     <div>

@@ -5,23 +5,26 @@ import { useParams } from "react-router-dom";
 const DescriptionPage = () => {
   const { id } = useParams();
   const [Podcasts, setPodcasts] = useState();
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
   useEffect(() => {
     const fetch = async () => {
       const res = await axios.get(
-        `http://localhost:1000/api/v1/get-podcast/${id}`,
+        `${backendUrl}/api/v1/get-podcast/${id}`,
         { withCredentials: true }
       );
       setPodcasts(res.data.data);
     };
     fetch();
-  }, []);
+  }, [id, backendUrl]);
+
   return (
     <div className="px-4 lg:px-12 py-4 h-auto flex flex-col md:flex-row items-start justify-between gap-4 ">
       {Podcasts && (
         <>
           <div className="w-2/6 flex items-center justify-center md:justify-start md:items-start">
             <img
-              src={`http://localhost:1000/${Podcasts.frontImage}`}
+              src={`${backendUrl}/${Podcasts.frontImage}`}
               alt="/"
               className="rounded w-full h-[50vh] object-cover"
             />

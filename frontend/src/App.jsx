@@ -17,11 +17,13 @@ import CategoriesPage from "./pages/CategoriesPage.jsx";
 import DescriptionPage from "./pages/DescriptionPage.jsx";
 const App = () => {
   const dispatch = useDispatch();
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
   useEffect(() => {
     const fetch = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:1000/api/v1/check-cookie",
+          `${backendUrl}/api/v1/check-cookie`,
           { withCredentials: true }
         );
         if (res.data.message == true) {
@@ -31,8 +33,11 @@ const App = () => {
         //console.log(error);
       }
     };
-    fetch();
-  }, []);
+   
+    if (backendUrl) {
+      fetch();
+    }
+  }, [dispatch, backendUrl]);
 
   return (
     <div className="">

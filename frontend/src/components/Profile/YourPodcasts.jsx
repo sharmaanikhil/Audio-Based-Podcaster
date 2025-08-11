@@ -2,18 +2,22 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import PodcastCard from "../PodcastCard/PodcastCard";
+
 const YourPodcasts = () => {
   const [Podcasts, setPodcasts] = useState();
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
   useEffect(() => {
     const fetch = async () => {
       const res = await axios.get(
-        "http://localhost:1000/api/v1/get-user-podcasts",
+        `${backendUrl}/api/v1/get-user-podcasts`,
         { withCredentials: true }
       );
       setPodcasts(res.data.data);
     };
     fetch();
-  }, []);
+  }, [backendUrl]); // Add backendUrl to dependency array
+
   return (
     <div className="px-4 lg:px-12 my-4">
       <div className="flex items-center justify-between gap-4">

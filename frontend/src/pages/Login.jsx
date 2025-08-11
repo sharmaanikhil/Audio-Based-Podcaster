@@ -6,10 +6,12 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../store/auth";
 import ErrorPage from "./ErrorPage";
+
 const Login = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
   const [Values, setValues] = useState({
     email: "",
     password: "",
@@ -19,10 +21,11 @@ const Login = () => {
     const { name, value } = e.target;
     setValues({ ...Values, [name]: value });
   };
+
   const handleSubmit = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:1000/api/v1/sign-in",
+        `${backendUrl}/api/v1/sign-in`,
         Values,
         {
           withCredentials: true,
